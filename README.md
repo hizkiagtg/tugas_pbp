@@ -37,4 +37,44 @@ Untuk pertanyaan selanjutnya, tentang kemungkinan pembuatan aplikasi web dengan 
 
 ## Implementasi langkah 1-4
 Berikut merupakan langkah-langkah yang saya lakukan untuk melakukan implementasi dalam proyek saya.
-1. Untuk tahapan pertama, sebenarnya langkah yang dilakukan sama dengan tutorial lab 1. Awalnya, saya harus membuat suatu fungsi yang menerima request pada folder katalog, yang mengembalikan render(request, "katalog.html").
+1. Untuk tahapan pertama, sebenarnya langkah yang dilakukan sama dengan tutorial lab 1. Awalnya, saya harus membuat suatu fungsi yang menerima request pada folder katalog, yang mengembalikan render(request, "katalog.html", context). Sebelumnya, di-assign di dalam fungsi show_katalog sebuah variabel context, yang berisi database, yang diwakilkan dengan variabel data_barang_katalog. Berikut tampilan kodenya:
+  ```py
+  def show_katalog(request):
+      data_barang_katalog = CatalogItem.objects.all()
+      context = {
+          'list_katalog': data_barang_katalog,
+          'nama': 'Hizkia Sebastian Ginting'
+      }
+      return render(request, "katalog.html", context)
+  ```
+2. Untuk membuat routing, langkah yang dilakukan adalah memodifikas urlpatterns yang terdapat pada urls.py pada folder project-django serta pada folder katalog.
+Awalnya, pada urls.py pada project_django perlu ditambah route sebagai berikut:
+  ```py
+  urlpatterns = [
+      path('admin/', admin.site.urls),
+      path('', include('example_app.urls')),
+      path('katalog/', include('katalog.urls'))
+  ]
+  ```
+  Selanjutnya, pada urls.py pada katalog akan ditambahkan pada urlpatterns nya sebagai berikut:
+  ```py
+  urlpatterns = [
+      path('', show_katalog, name='show_katalog'),
+  ]
+  ```
+  Sesudah itu, proses routing akan berhasil
+  
+3. Untuk memetakan data ke html, perlu dilakukan modifikasi pada file katalog.html pada templates. Pemetaan datanya akan dilakukan dengan mengiterasi semua elemen yang ada pada list_katalog, dan semua database pada CatalogItem akan di-display. Berikut potongan kodenya:
+```
+    {% for elemen in list_katalog %}
+        <tr>
+            <th>{{elemen.item_name}}</th>
+            <th>{{elemen.item_price}}</th>
+            <th>{{elemen.item_stock}}</th>
+            <th>{{elemen.description}}</th>
+            <th>{{elemen.rating}}</th>
+            <th>{{elemen.item_url}}</th>
+        </tr>
+    {% endfor %}
+```
+4. Untuk melakukan deployment ke heroku, langkah yang saya lakukan adalah membuat suatu app baru pada heroku terlebih dahulu. Pada kasus ini, saya membuat nama app nya sebagai 'tugas1pbp'. Selanjutnya, saya harus membuat suatu repositori secret pada Action Secrets di repositori github saya, yang akan menyimpan nama proyek pada 'HEROKU_APP_NAME', serta API Key pada 'HEROKU_API_KEY'. Selanjutnya, karena ada file dpl.yml pada procfile, deployment dapat berjalan sebagai mana mestinya dengan melakukan re-run workflows.
