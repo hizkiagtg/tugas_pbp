@@ -14,6 +14,6 @@ https://tugas1pbp.herokuapp.com/katalog/
 
 ## Chart Tentang Request Clien ke Web Aplikasi Berbasi Django beserta responnya
 
-
+https://user-images.githubusercontent.com/92731992/190301894-015c12b4-fed2-4c9f-99a7-8f9494c28f1b.jpg
 
 ## Penjelasan tentang Virtual Environment dan Alasan Penggunaan
