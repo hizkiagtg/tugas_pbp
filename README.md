@@ -25,3 +25,16 @@ Dari chart tersebut, terdapat beberapa proses. Berikut urutan prosesnya:
 7. File html yang telah diproses tersebut kemudian akan diteruskan kembali ke client sebagai bentuk response.
 
 ## Penjelasan tentang Virtual Environment dan Alasan Penggunaan
+Virtualenv merupakan suatu environment pada Python, yang memungkinkan terjadinya isolasi dari lingkungan tersebut terhadap virtual environment lain, dan libraries Python lain yang terinstal pada sistem OS. Adapun beberapa alasan penggunaan dari virtualenv dalam proyek django adalah:
+
+1. Virtual environment memungkinkan kita untuk menggunakan beberapa versi dari python beserta library dan modulnya di perangkat kita tanpa memubuat bentrok/kolisi antara setiap environment yang ada. Hal ini tentunya berguna bila kita mengerjakan beberapa proyek django yang mengharuskan kita dalam menggunakan versi python beserta libraries dan modul yang berbeda-beda di tiap proyeknya, dan tentunya dengan virtual environment tidak akan terjadi bentrok antara proyek django yang kita kerjakan
+
+2. Masih tetap berhubungan dengan poin pertama, virtual environment memungkinkan kita untuk menjaga dependensi yang dibutuhkan antara proyek-proyek berbeda. Misalkan kita ingin mengerjakan beberapa proyek, salah satunya mengharuskan dengan versi 1.9, dan yang lainnya adalah 1.10. Dengan virtualenv, kita dapat menjaga dependensi dari kedua proyek.
+
+3. Virtualenv lebih memudahkan kita dalam mengorganisasi proyek kita dan juga memudahkan kita untuk mengetahui lingkungan mana yang harus dijalankan bila di suatu kasus kita ingin menjalankan suatu proyek yang spesifik.
+
+Untuk pertanyaan selanjutnya, tentang kemungkinan pembuatan aplikasi web dengan Django tanpa virtualenv, sebenarnya masih memungkinkan. Tetapi, dalam kasus ini, tentunya kita kehilangan kemampuan untuk menciptakan dan menjaga dependensi dari proyek-proyek Django yang kita buat, serta dalam kasus ini memungkinkan terjadinya bentrok dari antar proyek, yang tentunya bisa saja mengharuskan dalam penggunaan dependensi yang berbeda-beda. Misalkan, bila kita ingin  mengerjakan dua buah proyek, di mana sistem kita terinstal django versi 1.9 dan proyek 1 dan 2 secara berturut-turut mengharuskan versi django 1.9 dan 1.10, kita hanya bisa mengerjakan proyek 1 karena hanya proyek tersebut yang memungkinkan untuk digunakan di sistem kita, dengan tetap menjaga dependensi proyek tersebut.
+
+## Implementasi langkah 1-4
+Berikut merupakan langkah-langkah yang saya lakukan untuk melakukan implementasi dalam proyek saya.
+1. Untuk tahapan pertama, sebenarnya langkah yang dilakukan sama dengan tutorial lab 1. Awalnya, saya harus membuat suatu fungsi yang menerima request pada folder katalog, yang mengembalikan render(request, "katalog.html").
