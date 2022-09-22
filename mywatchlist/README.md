@@ -105,3 +105,12 @@ Awalnya, pada urls.py pada project_django perlu ditambah route sebagai berikut:
     {% endfor %}
 ```
 4. Untuk melakukan deployment ke heroku, langkah yang saya lakukan adalah membuat suatu app baru pada heroku terlebih dahulu. Pada kasus ini, saya membuat nama app nya sebagai 'tugas1pbp'. Selanjutnya, saya harus membuat suatu repositori secret pada Action Secrets di repositori github saya, yang akan menyimpan nama proyek pada 'HEROKU_APP_NAME', serta API Key pada 'HEROKU_API_KEY'. Selanjutnya, karena ada file dpl.yml pada procfile, deployment dapat berjalan sebagai mana mestinya dengan melakukan re-run workflows.
+
+## POSTMAN
+### Versi HTML
+![image](https://user-images.githubusercontent.com/92731992/191651416-381de771-879a-42b1-a0e5-7f680904fa8a.png)
+### Versi XML
+![image](https://user-images.githubusercontent.com/92731992/191651513-71af0a3b-bd81-4210-9881-7fa363a39d76.png)
+### Versi JSON
+![image](https://user-images.githubusercontent.com/92731992/191651592-598ef852-be93-4bf6-8b0b-2e7267cbd827.png)
+
