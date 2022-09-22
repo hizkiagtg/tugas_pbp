@@ -45,7 +45,11 @@ Contoh XML:
         "color": "Black",
     }
   ```
-### HTML
+### HTML (HyperText Transfer Protocol)
+HTTP merupakan suatu protokok, di mana didalamnya bisa menampilkan halaman-halaman web, dan berbeda dengan JSON dan XML, HTML dapat digunakan untuk melakukan transaksi antara client dengan server. Sehingga, perbedaan utama dari HTML dengan JSON serta XML, HTML sendiri dapat ditampilkan pada web browser dan memungkinkan adanya interaksi antara client dengan server, sedangkan XML dan JSON lebih kepada penyimpanan dan transfer data (data delivery). Selain itu, HTML juga bersifat stateless, atau independen.
+
+## Mengapa Harus Menggunakan Data Delivery?
+Di kehidupan nyata, tentunya sangat membutuhkan proses pengolahan data baik itu pengaksesan maupun transfer data. Selain itu, tentunya di dalam pemrograman berbasis platform, akan membutuhkan mekanisme akses database yang dapat berinteraksi dengan pengguna. Sehingga, tentunya data delivery sangat krusial karena user sendiri sangat membutuhkan data dan pengolahannya. Bila tidak ada hal tersebut, maka tentunya sia-sia proses pengaksesan platform oleh user, karena mereka tidak dapat mengakses data yang mereka inginkan. Selain itu, dalam prakteknya, tentunya tiap proses data delivery membutuhkan jenis yang berbeda. Misalkan ketika ingin mengakses halaman, maka akan digunakan HTML, dan ketika HTML melakukan request data, akan dapat dikembalikan menggunakan XML ataupun JSON. Dari proses tersebut, dapat dilihat bahwa proses data delivery sangat krusial
 
 ## Implementasi Checklist
 Berikut merupakan langkah-langkah yang saya lakukan untuk melakukan implementasi dalam proyek saya.
@@ -62,49 +66,38 @@ Berikut merupakan langkah-langkah yang saya lakukan untuk melakukan implementasi
         path('mywatchlist/', include('mywatchlist.urls')),
     ]
   ```
-3
-Untuk tahapan pertama, sebenarnya langkah yang dilakukan sama dengan tutorial lab 1. Awalnya, saya harus membuat suatu fungsi yang menerima request pada folder katalog, yang mengembalikan render(request, "katalog.html", context). Sebelumnya, di-assign di dalam fungsi show_katalog sebuah variabel context, yang berisi database, yang diwakilkan dengan variabel data_barang_katalog. Berikut tampilan kodenya:
-
+3. Sesudah tahapan itu, maka akan dilakukan pembuatan model sesuai dengan atribut yang diinginkan. Berikut model yang saya buat
   ```py
-    def show_katalog(request):
-        data_barang_katalog = CatalogItem.objects.all()
-        context = {
-            'list_katalog': data_barang_katalog,
-            'nama': 'Hizkia Sebastian Ginting'
-        }
-        return render(request, "katalog.html", context)
-  ```
-2. Untuk membuat routing, langkah yang dilakukan adalah memodifikas urlpatterns yang terdapat pada urls.py pada folder project-django serta pada folder katalog.
-Awalnya, pada urls.py pada project_django perlu ditambah route sebagai berikut:
-  ```py
+    class MyWatchList(models.Model):
+        title = models.CharField(max_length=255)
+        watched = models.BooleanField() 
+        rating = models.IntegerField(validators= 
+                        [MaxValueValidator(5), MinValueValidator(1)])
+        release_date = models.DateField()
+        review = models.TextField()
+   ```
+Dalam hal ini, saya membuat watched sebagai boolean, karena hanya memiliki dua kemungkinan, yaitu sudah pernah ditonton atau tidak (true/false). Selain itu, saya juga membatasi nilai dari rating dari 1-5 (inklusif).
+5. Sesudah itu, saya tinggal membuat fungsi pada views di mywatchlist, yang akan mengembalikanpada render untuk html, serta akan menampilkan HTTPResponse untuk XML dan JSON. Sesudah itu, akan ditambahkan route nya pada urlpatterns di urls.py, sebagai berikut:
+```py
   urlpatterns = [
-      path('admin/', admin.site.urls),
-      path('', include('example_app.urls')),
-      path('katalog/', include('katalog.urls'))
+      path('html/', show_watchlist, name='show_watchlist'),
+      path('xml/', show_xml, name= 'show_xml'), 
+      path('json/', show_json, name='show_json'),
   ]
-  ```
-  Selanjutnya, pada urls.py pada katalog akan ditambahkan pada urlpatterns nya sebagai berikut:
-  ```py
-  urlpatterns = [
-      path('', show_katalog, name='show_katalog'),
-  ]
-  ```
-  Sesudah itu, proses routing akan berhasil
-  
-3. Untuk memetakan data ke html, perlu dilakukan modifikasi pada file katalog.html pada templates. Pemetaan datanya akan dilakukan dengan mengiterasi semua elemen yang ada pada list_katalog, dan semua database pada CatalogItem akan di-display. Berikut potongan kodenya:
 ```
-    {% for elemen in list_katalog %}
+6. Selanjutnya, tinggal dibuat suatu templete HTML, yang akan memetakan semua data pada model. Adapun pemetaannya sebagai berikut:
+```
+    {% for watchlist in list_watchlist %}
         <tr>
-            <th>{{elemen.item_name}}</th>
-            <th>{{elemen.item_price}}</th>
-            <th>{{elemen.item_stock}}</th>
-            <th>{{elemen.description}}</th>
-            <th>{{elemen.rating}}</th>
-            <th>{{elemen.item_url}}</th>
+            <th>{{watchlist.title}}</th>
+            <th>{{watchlist.watched}}</th>
+            <th>{{watchlist.rating}}</th>
+            <th>{{watchlist.release_date}}</th>
+            <th>{{watchlist.review}}</th>
         </tr>
     {% endfor %}
 ```
-4. Untuk melakukan deployment ke heroku, langkah yang saya lakukan adalah membuat suatu app baru pada heroku terlebih dahulu. Pada kasus ini, saya membuat nama app nya sebagai 'tugas1pbp'. Selanjutnya, saya harus membuat suatu repositori secret pada Action Secrets di repositori github saya, yang akan menyimpan nama proyek pada 'HEROKU_APP_NAME', serta API Key pada 'HEROKU_API_KEY'. Selanjutnya, karena ada file dpl.yml pada procfile, deployment dapat berjalan sebagai mana mestinya dengan melakukan re-run workflows.
+7. Selanjutnya, akan dilakukan proses deploy, dengan mengubah procfile terlebih dahulu. Di sini, link untuk deploy akan sama dengan tugas minggu lalu, tetapi tinggal di jalankan ulang di github (agar melakukan deploy ulang).
 
 ## POSTMAN
 ### Versi HTML
