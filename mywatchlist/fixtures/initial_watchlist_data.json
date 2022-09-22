@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "title": "Les Miserables",
+            "watched": true,
+            "rating": 5,
+            "release_date": "2013-01-16",
+            "review": "A brilliant adaptation of the play."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "title": "The Impossible",
+            "watched": true,
+            "rating": 5,
+            "release_date": "2012-10-11",
+            "review": "A terrible event, but a moving film. "
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "title": "Pengabdi Setan",
+            "watched": false,
+            "rating": 4,
+            "release_date": "2017-09-28",
+            "review": "Scary movie, with good sound effect"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {
+            "title": "Harry Potter and the Sorcerer's Stonde",
+            "watched": true,
+            "rating": 5,
+            "release_date": "2001-12-19",
+            "review": "Good adaptation from the book"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {
+            "title": "Cat",
+            "watched": false,
+            "rating": 2,
+            "release_date": "2019-12-27",
+            "review": "Terrible movie with terrible cast and plot"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {
+            "title": "Incantation",
+            "watched": true,
+            "rating": 4,
+            "release_date": "2022-03-18",
+            "review": "This movie gives me a nightmares"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 7,
+        "fields": {
+            "title": "A Quiet Place Part II",
+            "watched": true,
+            "rating": 3,
+            "release_date": "2018-09-05",
+            "review": "Very cliche, and lots of jump scares"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 8,
+        "fields": {
+            "title": "Harry Potter and the Order of the Phoenix",
+            "watched": true,
+            "rating": 5,
+            "release_date": "2007-07-11",
+            "review": "The most favorite movie from this series"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {
+            "title": "Little Woman",
+            "watched": true,
+            "rating": 4,
+            "release_date": "2020-02-07",
+            "review": "Great movie and great story"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {
+            "title": "Titanic",
+            "watched": true,
+            "rating": 5,
+            "release_date": "1998-01-05",
+            "review": "Great love story from Jack and Rose"
+        }
+    }
+]
