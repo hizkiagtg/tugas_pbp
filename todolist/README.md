@@ -97,3 +97,8 @@ membuat task  : ```py add_todolist```
 ```
 
 7. Selanjutnya, akan dilakukan proses deploy. Karena menggunakan nama proyek yang sama dengan tugas sebelumnya, maka hanya perlu melakukan command "heroku restart" pada cmd, lalu setelahnya melakukan re-running dari deployment yang ada pada github.
+
+8. Selanjutnya, saya terlebih dahulu harus membuat 2 user, dengan cara meregristrasi terlebih dahulu pada pilihan form login. Username pertama yang saya buat adalah "hizkia123". Selanjutnya, saya memasukkan 3 pasang data todolist (title, description) pada pilihan "ADd New todolis". Berikut 3 data yang saya masukkan pada user "hizkia123":
+![image](https://user-images.githubusercontent.com/92731992/192939817-43d4d95d-6e33-4b1f-adb3-e7d00eecbb68.png)
+Selanjutnya, saya membuat username yang lain, yaitu "gtg123", dan melakukan proses yang sama seperti yang diatas. Berikut tampilan todolist yang saya buat untuk user tersebut:
+![image](https://user-images.githubusercontent.com/92731992/192939987-1edce8eb-b048-4194-b291-d1bc682c45ba.png)
