@@ -75,12 +75,17 @@ Berikut merupakan langkah-langkah yang saya lakukan untuk melakukan implementasi
    ```
    Setelah tahapan membuat model, maka akan dilakukan migrasi model ke database dengan command ```python manage.py makemigrations``` dan ```python manage.py migrate```
 
-4. Selanjutnya membuat function untuk halaman utama, register, login, logout beserta membuat task baru di views pada todolist. Adapun, berikut pasangan-pasangan dari fungsi yang bersesuaian (untuk lebih lengkapnya, dapat dilihat di views.py pada todolist)
-halaman utama : ```py show_todolist```
-register      : ```py register```
-login         : ```py login```
-logout        : ```py logout```
-membuat task  : ```py add_todolist```
+4. Selanjutnya membuat function untuk halaman utama, register, login, logout beserta membuat task baru di views pada todolist. Adapun, berikut pasangan-pasangan dari fungsi yang bersesuaian (untuk lebih lengkapnya, dapat dilihat di views.py pada todolist):
+
+halaman utama : ```show_todolist```
+
+register      : ```register```
+
+login         : ```login```
+
+logout        : ```logout```
+
+membuat task  : ```add_todolist```
 
 5. Selanjutnya, akan membuat file html dan button yang bersesuaian. Untuk halaman utama, dapat dilihat di ```todolist.html```, dan button login beserta button add_todolist juga akan ditampilkan pada halaman tersebut. Untuk register akan terdapat pada ```register.html```, untuk login akan ditampilkan pada ```login.html```, serta untuk halaman add_todolist akan terdapat pada ```add_todolist.html```. Semua file tersebut terdapat pada folder templates.
 
@@ -104,5 +109,3 @@ membuat task  : ```py add_todolist```
 ![image](https://user-images.githubusercontent.com/92731992/192939817-43d4d95d-6e33-4b1f-adb3-e7d00eecbb68.png)
 Selanjutnya, saya membuat username yang lain, yaitu "gtg123", dan melakukan proses yang sama seperti yang diatas. Berikut tampilan todolist yang saya buat untuk user tersebut:
 ![image](https://user-images.githubusercontent.com/92731992/192939987-1edce8eb-b048-4194-b291-d1bc682c45ba.png)
-=======
->>>>>>> 40246b6b60068a6f239a3433f20bd1a98f6e4061
