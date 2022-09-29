@@ -73,6 +73,7 @@ Berikut merupakan langkah-langkah yang saya lakukan untuk melakukan implementasi
       description = models.TextField()
       is_finished = models.BooleanField(default=False)
    ```
+   Setelah tahapan membuat model, maka akan dilakukan migrasi model ke database dengan command ```python manage.py makemigrations``` dan ```python manage.py migrate```
 
 4. Selanjutnya membuat function untuk halaman utama, register, login, logout beserta membuat task baru di views pada todolist. Adapun, berikut pasangan-pasangan dari fungsi yang bersesuaian (untuk lebih lengkapnya, dapat dilihat di views.py pada todolist)
 halaman utama : ```py show_todolist```
