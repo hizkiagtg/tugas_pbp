@@ -5,6 +5,5 @@ app_name = 'mywatchlist'
 
 urlpatterns = [
     path('html/', show_watchlist, name='show_watchlist'),
-    path('xml/', show_xml, name= 'show_xml'), 
-    path('json/', show_json, name='show_json'),
+    path('<str:jenis>/', show, name = "show"),
 ]

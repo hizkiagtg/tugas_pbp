@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Add New Todolist</title>
+{% endblock meta %}
+
+{% block content %}
+<h1>Add Your New Todolist</h1>
+<form method="POST" action="">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Title: </td>
+            <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
+        </tr>
+                
+        <tr>
+            <td>Description: </td>
+            <td><input type="text" name="description" placeholder="Description" class="form-control"></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input class="btn add_todolist" type="submit" value="Add New todolist" href="{% url 'todolist:register' %}"></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock content %}
