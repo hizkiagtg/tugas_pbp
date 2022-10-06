@@ -5,29 +5,156 @@
 {% endblock meta %}
 
 {% block content %}  
-
-<div class = "login">
+<style>
+    input[type=text], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type=password], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
     
-    <h1>Formulir Registrasi</h1>  
+    input[type=submit] {
+      width: 100%;
+      background-color: #3d6dab;
+      color: rgb(0, 0, 0);
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #467cf0;
+    }
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
+    input,
+    button {
+        padding: 0.5rem;
+        font-family: inherit;
+        font-size: inherit;
+    }
+    /* Style the container */
+    .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    }
+    .content {
+    max-width: 500px;
+    margin: auto;
+    }
 
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .container .login{
+        background-color: rgba(38, 160, 160, 0.966);
+        padding: 30px 50px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    /* Floating column for labels: 25% width */
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+
+    /* Floating column for inputs: 75% width */
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+    body {
+        text-align: center;
+        background-image: linear-gradient(rgb(118, 250, 211), rgb(253, 253, 253));
+        font-family: Tahoma, sans-serif;
+        
+    }
+    form {
+        display: inline-block;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    div {
+      border-radius: 5px;
+      background-color: #ffffff;
+      padding: 20px;
+    }
+    @media screen and (max-width: 600px) {
+        .col-25, .col-75, input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+    #shade {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    #color2 {
+        background-image: linear-gradient(rgb(118, 250, 211), rgb(253, 253, 253));
+    }
+    #color1 {
+        background-color: rgb(76, 243, 215); /* For browsers that do not support gradients */
+    }
+    #grad1 {
+        background-color: rgb(76, 243, 215); /* For browsers that do not support gradients */
+        background-image: linear-gradient(rgb(238, 255, 0), rgb(68, 241, 239));
+    }
+</style>
+    <div class = "container" id = "color2">
+        <div class = "login" id = "shade">
+            <h1>Formulir Registrasi</h1>  
+
+                <form method="POST" >  
+                    {% csrf_token %}  
+                    <table>  
+                        {{ form.as_table }}  
+                        <tr>  
+                            <td></td>
+                            <td><input type="submit" name="submit" value="Daftar"/></td>  
+                        </tr>  
+                    </table>  
+                </form>
+
+            {% if messages %}  
+                <ul>   
+                    {% for message in messages %}  
+                        <li>{{ message }}</li>  
+                        {% endfor %}  
+                </ul>   
+            {% endif %}
+        </div>
+
 
 </div>  
 
