@@ -109,3 +109,12 @@ membuat task  : ```add_todolist```
 ![image](https://user-images.githubusercontent.com/92731992/192939817-43d4d95d-6e33-4b1f-adb3-e7d00eecbb68.png)
 Selanjutnya, saya membuat username yang lain, yaitu "gtg123", dan melakukan proses yang sama seperti yang diatas. Berikut tampilan todolist yang saya buat untuk user tersebut:
 ![image](https://user-images.githubusercontent.com/92731992/192939987-1edce8eb-b048-4194-b291-d1bc682c45ba.png)
+
+## Tambahan Pertanyaan Untuk Tugas 5
+### Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+1. Inline CSS
+Merupakan suatu format penulisan CSS di mana bagian-bagian dari CSS langsung menempel (sebagai attachment) pada kode/bagian dari HTML. Biasanya, style jenis ini akan terdapat dalam tag HTML dalam bentuk atribut. Kekurangan dari inline CSS yaitu dapat mempengaruhi ukuran halaman dan ukurusan download, serta lebih time-consuming untuk pembuatannya. Selain itu dapat membuat struktur HTML menjadi berantakan
+3. Internal or Embedded CSS
+4. External CSS
+
+
