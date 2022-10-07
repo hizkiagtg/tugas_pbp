@@ -146,4 +146,89 @@ External CSS mengharuskan kita untuk membuat suatu eksternal file CSS, yang nant
    Untuk mengambil semua elemen, sesuai dengan atribut terget, dimana targetnya adalah "attribute"
 
 ```
-###
+### Implementasi dari Checklist
+1. Kostumasi halaman untuk login, register, dan create-task
+
+Untuk halaman-halaman tersebut, saya hanya menggunakan styling dengan internal CSS. Sehinggga, saya harus menyisipkan antara head, style-style yang ingin saya gunakan. Berikut salah satu syle yang saya buat (untuk create-task):
+
+```
+  <style>
+      button {
+          padding: 0.5rem;
+          font-family: inherit;
+          font-size: inherit;
+          width: 100%;
+          background-color: #3d6dab;
+          color: rgb(0, 0, 0);
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+  </style>
+```
+Untuk halaman todolist, saya juga menggunakan internal CSS untuk mebuat card, tetapi saya juga menambahkan bootsrap untuk navbar. Adapun untuk card nya, saya menggunakan flip card, dengan efek rotate ketika di hover. Di sini, class utama dari selector nya adalah.flip-card, yang memiliki beberapa kelas yang berhubungan, yang termasuk didalamnya mengatur halaman belakang (.flip-card-back) dan halaman depan (.flip-card-back).  Berikut tampilan kodenya:
+```
+    .flip-card {
+        background-color: transparent;
+        width: 500px;
+        height: 175px;
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+    background-color: #bbb;
+    color: black;
+    }
+
+    .flip-card-back {
+        background-color: #bbb;
+        color: white;
+        transform: rotateY(180deg);
+    }
+```
+2. Membuat halaman menjadi responsif
+
+Untuk membuat halaman menjadi responsif, maka saya menambahkan Media Query pada setial internal CSS, pada setiap template HTML. Di sini, saya mengkostumasi agar halaman dapat dibuka diperangkat mobile (smartphone). Berikut tampilan kode Media Query nya:
+```
+  @media only screen and (max-width: 768px) {
+      .container{
+          margin: 30px;
+          padding: 30px 40px;
+          font-size: 0.8rem;
+      }
+
+  }
+```
