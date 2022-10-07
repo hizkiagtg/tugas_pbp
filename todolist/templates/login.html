@@ -7,6 +7,7 @@
 
 {% block content %}
 <style>
+    
     input[type=text], select {
       width: 100%;
       padding: 12px 20px;
@@ -114,11 +115,13 @@
       background-color: #ffffff;
       padding: 20px;
     }
-    @media screen and (max-width: 600px) {
-        .col-25, .col-75, input[type=submit] {
-            width: 100%;
-            margin-top: 0;
+    @media only screen and (max-width: 768px) {
+        .container{
+            margin: 30px;
+            padding: 30px 40px;
+            font-size: 0.8rem;
         }
+
     }
     #color2 {
         background-image: linear-gradient(rgb(118, 250, 211), rgb(253, 253, 253));
