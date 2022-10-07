@@ -103,7 +103,6 @@ membuat task  : ```add_todolist```
 ```
 
 7. Selanjutnya, akan dilakukan proses deploy. Karena menggunakan nama proyek yang sama dengan tugas sebelumnya, maka hanya perlu melakukan command "heroku restart" pada cmd, lalu setelahnya melakukan re-running dari deployment yang ada pada github.
-<<<<<<< HEAD
 
 8. Selanjutnya, saya terlebih dahulu harus membuat 2 user, dengan cara meregristrasi terlebih dahulu pada pilihan form login. Username pertama yang saya buat adalah "hizkia123". Selanjutnya, saya memasukkan 3 pasang data todolist (title, description) pada pilihan "ADd New todolis". Berikut 3 data yang saya masukkan pada user "hizkia123":
 ![image](https://user-images.githubusercontent.com/92731992/192939817-43d4d95d-6e33-4b1f-adb3-e7d00eecbb68.png)
@@ -114,7 +113,37 @@ Selanjutnya, saya membuat username yang lain, yaitu "gtg123", dan melakukan pros
 ### Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
 1. Inline CSS
 Merupakan suatu format penulisan CSS di mana bagian-bagian dari CSS langsung menempel (sebagai attachment) pada kode/bagian dari HTML. Biasanya, style jenis ini akan terdapat dalam tag HTML dalam bentuk atribut. Kekurangan dari inline CSS yaitu dapat mempengaruhi ukuran halaman dan ukurusan download, serta lebih time-consuming untuk pembuatannya. Selain itu dapat membuat struktur HTML menjadi berantakan
-3. Internal or Embedded CSS
-4. External CSS
+2. Internal or Embedded CSS
+Pada jenis CSS bagian ini, kita diharuskan untuk menambahkan tag <style> pada bagian <head> di dokumen HTML. Style jenis ini lumayan efektif untuk melakukan style di 1 halaman. Namun, akan memakan banyak waktu untuk membuat style ini di berbagai halaman di website. Kelebihan dari style ini adalah kita bisa menggunakan ID selectors, dan kekurangannya adalah akan menambah ukuran halaman dan waktu loading.
+3. External CSS
+External CSS mengharuskan kita untuk membuat suatu eksternal file CSS, yang nanti akan dipanggil dengan dengan menambahkan referesensi pada section head. Metode ini lebih efisien, terutama ketika ingin melakukan styling terhadap website yang besar. Dengan hanya menggunakan 1 file css saja, maka kita dapat mengubah seluruh situs web. Kelebihan dari metode ini memungkinkan kita untuk menggunakan kode HTML yang lebih jelas dan ukuran lebih kecil, karena CSS ditulis terpisah. Selain itu, kita dapat menggunakan styling yang sama di berbagai halaman. Adapun kekurangannya, halaman mungkin tidak dapat dirender secara normal selama eksternal CSS dapat di-load. Selain itu, melakukan upload atau linking berbagai CSS dapat meningkatkan kecepatan download dari situs.
+  
+### Sebutkan tag HTML5 yang kamu ketahui
+```
+ <html>     : Untuk membuat dokumen html
+ <title>    : Untuk membuat judul dari halaman
+ <body>     : Untuk membuat tubuh dari halaman
+ <h1>-<h6>  : Untuk membuat heading
+ <p>        : Untuk membuat paragraf
+ <form>     : Untuk membuat suatu form
+ <table>    : Untuk membuat suatu file
+ <input>    : Berguna untuk mengambil input
+ <button>   : Untuk membuat suatu tombol yang dapat di-klik
+ <br>       : Untuk membuat suatu breakline (baris putus)
 
+```
+### Sebutkan CSS selector yang kamu ketahui
+```
+ .class              : 
+   Untuk membuat suatu class, yang nanti bisa mengambil semua elemen dari class ="class" tersebut
+ .class .subclass    : 
+   Untuk membuat suatu class dan subclassnya, yang nantinya bisa mengambil dari elemen subclass, yang merupakan turunan dari class
+ #id                 :
+   Untuk memilih elemen dengan id = id
+ *                   :
+   Untuk memilih semua elemen
+ [attribute]         :
+   Untuk mengambil semua elemen, sesuai dengan atribut terget, dimana targetnya adalah "attribute"
 
+```
+###
