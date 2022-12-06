@@ -2,202 +2,118 @@
 {% load static %}
 {% block content %}
 
-<style>
-    button {
-        padding: 0.5rem;
-        font-family: inherit;
-        font-size: inherit;
-        width: 100%;
-        background-color: rgba(38, 160, 160, 0.966);
-        color: rgb(0, 0, 0);
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    /* Style the container */
-    .container {
-    border-radius: 5px;
-    background-color: rgba(38, 160, 160, 0.966);
-    background-image: linear-gradient(rgb(118, 250, 211), rgb(253, 253, 253));
-    padding: 20px;
-    }
-    .content {
-    max-width: 500px;
-    margin: auto;
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+
+<script>
+    $(document).ready(function() {
+            getTodolist();
+    });
+
+    async function getTodolist() {
+        $.getJSON("json", function(data) {
+            var todolistHTML = '';
+            $.each(data, function (key, task) {
+                todolistHTML += getCard(task);
+            });
+            console.log(todolistHTML); 
+            document.getElementById("content").innerHTML = todolistHTML;
+        })
     }
 
-    .container {
-        background-color: rgba(38, 160, 160, 0.966);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        width: 100%;
+    function getCard(task) {
+        item = `    
+        <div class="accordion" id=acc-${task.pk}>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading${task.pk}">
+                    <button class="accordion-button" type="button">
+                        <img src = "https://cdn-icons-png.flaticon.com/512/4697/4697260.png" width = "50" height = "50">
+                        <h1>${task.fields.title}</h1>
+                    </button>
+                </h2>
+                <div id="collapse${task.pk}" class="accordion-collapse collapse show" aria-labelledby="heading${task.pk}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>at ${task.fields.date} </strong> 
+                        <p>${task.fields.description}</p>
+                        {% if task.fields.is_finished %}
+                            <p>Finished</p>
+                        {% else %}
+                            <p id = "task-finished-${task.pk}">Not Finished</p>
+                            <button id="task-finished-${task.pk}" class="btn btn-primary" onclick="finished(${task.pk})">Finished Todolist</button>
+                        {% endif %}
+                        <button id="submit-task" class="btn btn-primary" onclick="deleteTask(${task.pk})">Delete Todolist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+        return item;
     }
 
-    .container .subCont{
-        background-color: rgba(38, 160, 160, 0.966);
-        padding: 600px 600px;
-        border-radius: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+    function submitNewTask(taskForm) {
+        $.post("create-task/", $(taskForm).serialize(), function(data){
+            document.getElementById("content").innerHTML += getCard(data[0]);
+        });
+    }
+    function deleteTask(id) {
+    $.post(`delete-task/${id}`, $(taskForm).serialize(), function(){
+        $(`#acc-${id}`).fadeOut('slow');
+    });
     }
 
-    /* Floating column for labels: 25% width */
-    .col-25 {
-        float: left;
-        width: 25%;
-        margin-top: 6px;
-    }
+    function finished(id) {
+    $.post(`finished-task/${id}`, $(taskForm).serialize(), function(){
+        $(`#task-finished-${id}`).fadeOut('slow');
+    });
+}
 
-    /* Floating column for inputs: 75% width */
-    .col-75 {
-        float: left;
-        width: 75%;
-        margin-top: 6px;
-    }
-    body {
-        text-align: center;
-        background-image: linear-gradient(rgb(118, 250, 211), rgb(253, 253, 253));
-        font-family: Tahoma, sans-serif;
-        
-    }
-    form {
-        display: inline-block;
-    }
-
-    /* Clear floats after the columns */
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
     
-    div {
-      border-radius: 5px;
-      background-color: rgba(38, 160, 160, 0.966);
-      padding: 20px;
-    }
-    @media only screen and (max-width: 768px) {
-        .container{
-            margin: 30px;
-            padding: 30px 40px;
-            font-size: 0.8rem;
-        }
-
-    }
-    .flip-card {
-        background-color: transparent;
-        width: 500px;
-        height: 175px;
-        perspective: 1000px;
-    }
-
-    .flip-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    }
-
-    .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
-
-    .flip-card-front {
-    background-color: #bbb;
-    color: black;
-    }
-
-    .flip-card-back {
-        background-color: #bbb;
-        color: white;
-        transform: rotateY(180deg);
-    }
-    #shade {
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    }
-    #color2 {
-        background-image: linear-gradient(rgb(118, 250, 211), rgb(253, 253, 253));
-    }
-    #color1 {
-        background-color: rgb(76, 243, 215); /* For browsers that do not support gradients */
-    }
-    #grad1 {
-        background-color: rgb(76, 243, 215); /* For browsers that do not support gradients */
-        background-image: linear-gradient(rgb(238, 255, 0), rgb(68, 241, 239));
-    }
-</style>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-</head>
-<nav class="navbar" >
+</script>
+    
+<nav class="navbar" style="background-color: #76cfad;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Username: {{nama}}</a>
-      <a class="btn btn-primary btn-lg" href="{% url 'todolist:add_todolist' %}" role="button">Add New todolist</a>
+      <a class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modal-ajax">Create New Todolist</a>
       <a class="btn btn-primary btn-lg" href="{% url 'todolist:logout' %}" role="button">Logout</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 </nav>
 
 
-<div class = "container" id = "color2">
-    <div class = "subCont" id = "color2">
-        {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-        {% for task in list_task %}
-            <div class = "flip-card">
-                <div class = "flip-card-inner">
-                    <div class = "flip-card-front">
-                        <table>
-                            <tr>
-                                <th>Task Title</th>
-                                <th>Date</th>
-                                <th>Description</th>
-                                <th>Finished Status</th>
-                            </tr>
-                            <tr>
-                                <th>{{task.title}}</th>
-                                <th>{{task.date}}</th>
-                                <th>{{task.description}}</th>
-                                <th>{% if task.is_finished %}
-                                        Finished
-                                    {% else %}
-                                        Not Finished
-                                    {% endif %}
-                                </th>
-                            </tr>
-                        </table>
+<div>
+    <table class="table table-borderless">
+        <thead>
+            <tr class="">
+                <th class="text-center" scope="col" style=font-size:30px>TodoList</th>
+            </tr>
+        </thead>
+        <tbody id="content"></tbody>
+    </table>
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="modal-ajax" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Your New Todolist</h1>
+            <div class="modal-body">
+                <form id="taskForm" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="title" class="col-form-label">Title</label>
+                        <input type="text" name="title" class="form-control" id="title" required>
                     </div>
-                    <div class = "flip-card-back">
-                        <table>
-                        <tr>
-                        {% if task.is_finished == False %}
-                            <th><button><a href="{% url 'todolist:finished' task.id %}">Finished Task</a></button></th>
-                        {% endif %}
-                            <th><button><a href="{% url 'todolist:deleted' task.id %}">Delete Task</a></button></th>
-                        </tr>
-                        </table>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description</label>
+                        <textarea class="form-control" id="description"  name="description" required></textarea>
                     </div>
-                </div>
+                    
+                </form>
+                <button id="submit-task" class="btn btn-primary" onclick="submitNewTask(taskForm)">Submit Todolist</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
-        {% endfor %}
+        </div>
     </div>
 </div>
 

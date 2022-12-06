@@ -5,12 +5,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.http import HttpResponse
+from django.http import HttpResponseNotFound
 from django.core import serializers
 from django.shortcuts import render
 from todolist.models import Task
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+
+
 # Create your views here.
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
@@ -20,7 +23,9 @@ def show_todolist(request):
             'nama': request.user,
         }
         return render(request, "todolist.html", context)
-        
+def show_json(request):
+    data = Task.objects.filter(user = request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")        
 def register(request):
     form = UserCreationForm()
 
@@ -57,14 +62,27 @@ def add_todolist(request):
         title = request.POST.get('title')
         date = datetime.now()
         description = request.POST.get('description')
-        Task.objects.create(
+        newTask = Task(
             user = request.user,
             date = date,
             title = title,
             description = description,
         )
-        return redirect("todolist:show_todolist")
-    return render(request, 'add_todolist.html')
+        newTask.save()
+        return HttpResponse(serializers.serialize("json",[newTask]), content_type="application/json")
+    return HttpResponseNotFound()
+
+def add_todolist_ajax(request):
+    if request.method == 'POST':
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        Task(user = request.user, title=title, description=description, date=datetime.datetime.now()).save()
+    return HttpResponse('')
+    
+def deleted_ajax(request, id):
+    if(request.method == 'GET'):
+        Task.objects.get(pk=id).delete()
+    return HttpResponse('')
 
 def deleted(request, id):
     Task.objects.get(pk = id).delete()
