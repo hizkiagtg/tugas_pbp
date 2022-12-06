@@ -71,13 +71,6 @@ def add_todolist(request):
         newTask.save()
         return HttpResponse(serializers.serialize("json",[newTask]), content_type="application/json")
     return HttpResponseNotFound()
-
-def add_todolist_ajax(request):
-    if request.method == 'POST':
-        title = request.POST.get("title")
-        description = request.POST.get("description")
-        Task(user = request.user, title=title, description=description, date=datetime.datetime.now()).save()
-    return HttpResponse('')
     
 def deleted_ajax(request, id):
     if(request.method == 'GET'):
